@@ -46,24 +46,24 @@ namespace Ex05TueThreads
             lock (_lockpad)
             {
 
-            string _output = "";
+                string _output = "";
 
-            if (_availableSymbols != _symbolType.Asterisk)
-            {
-                Monitor.Wait(_lockpad);
-            }
+                if (_availableSymbols != _symbolType.Asterisk)
+                {
+                    Monitor.Wait(_lockpad);
+                }
 
-            for (int i = 0; i < 60; i++)
-            {
-                _output = _output + "*";
-                _totalSymbolCount++;
-            }
+                for (int i = 0; i < 60; i++)
+                {
+                    _output = _output + "*";
+                    _totalSymbolCount++;
+                }
 
-            _output = _output + " " + _totalSymbolCount;
-            _availableSymbols = _symbolType.Hash;
-            Console.WriteLine(_output);
-            Monitor.Pulse(_lockpad);
-          //Thread.Sleep(1000);
+                _output = _output + " " + _totalSymbolCount;
+                _availableSymbols = _symbolType.Hash;
+                Console.WriteLine(_output);
+                Monitor.Pulse(_lockpad);
+              //Thread.Sleep(1000);
 
 
 
@@ -76,23 +76,23 @@ namespace Ex05TueThreads
            
             lock (_lockpad)
             {
-            string _output = "";
-            if (_availableSymbols != _symbolType.Hash)
+                string _output = "";
+                if (_availableSymbols != _symbolType.Hash)
+                    {
+                        Monitor.Wait(_lockpad);
+                    }
+
+                for (int i = 0; i < 60; i++)
                 {
-                    Monitor.Wait(_lockpad);
+                    _output = _output + "#";
+                    _totalSymbolCount++;
                 }
 
-            for (int i = 0; i < 60; i++)
-            {
-                _output = _output + "#";
-                _totalSymbolCount++;
-            }
-
-            _output = _output + " " + _totalSymbolCount;
-            _availableSymbols = _symbolType.Asterisk;
-            Console.WriteLine(_output);
-            Monitor.Pulse(_lockpad);
-          //Thread.Sleep(1000);
+                _output = _output + " " + _totalSymbolCount;
+                _availableSymbols = _symbolType.Asterisk;
+                Console.WriteLine(_output);
+                Monitor.Pulse(_lockpad);
+              //Thread.Sleep(1000);
             }
         }
     }
