@@ -10,8 +10,8 @@ namespace Ex05TueThreads
     public class CounterThreads
     {
         private static int _counter = 0;
-        private bool _lastRanPostive = false;
-        //private static object _padLock = new object();
+        private static bool _lastRanPostive = false;
+        private static object _padLock = new object();
 
         public CounterThreads()
         {
@@ -38,19 +38,17 @@ namespace Ex05TueThreads
         {
 
 
-            lock (this)
+            lock (_padLock)
             {
                 if (_lastRanPostive == true)
                 {
-                    Monitor.Wait(this);
+                    Monitor.Wait(_padLock);
                 }
                 _counter += 2;
-                Console.WriteLine(_counter);
-                Thread.Sleep(1000);
                 _lastRanPostive = true;
-                Monitor.Pulse(this);
-                
-
+                Console.WriteLine(_counter);              
+                Monitor.Pulse(_padLock);
+                Thread.Sleep(1000);
             }
 
 
@@ -59,17 +57,17 @@ namespace Ex05TueThreads
         public void NegativeIncrement()
         {
 
-            lock (this)
+            lock (_padLock)
             {
                 if (_lastRanPostive == false)
                 {
-                    Monitor.Wait(this);
+                    Monitor.Wait(_padLock);
                 }
                 _counter -= 1;
-                Console.WriteLine(_counter);
-
                 _lastRanPostive = false;
-                Monitor.Pulse(this);
+                Console.WriteLine(_counter);
+                Monitor.Pulse(_padLock);
+                Thread.Sleep(1000);
             }
 
 

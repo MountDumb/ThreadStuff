@@ -14,9 +14,31 @@ namespace Ex05TueThreads
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.CountRunner();
+            p.Symbolicist();
+            //p.CountRunner();
             //p.FirstExRun();
                        
+
+        }
+
+        public void Symbolicist()
+        {
+            Symbolism symbols = new Symbolism();
+
+            Thread astThread = new Thread(new ThreadStart(symbols.DoAsterisk));
+            Thread Hashthread = new Thread(new ThreadStart(symbols.Dohash));
+
+            astThread.Start();
+            Hashthread.Start();
+
+            Console.ReadKey();
+
+            Console.WriteLine("Aborting...");
+
+            astThread.Abort();
+            Hashthread.Abort();
+
+            Console.ReadKey();
 
         }
 
@@ -29,6 +51,15 @@ namespace Ex05TueThreads
 
             posThread.Start();
             negThread.Start();
+
+            Console.ReadKey();
+
+            Console.WriteLine("Aborting...");
+
+            posThread.Abort();
+            negThread.Abort();
+
+            Console.ReadKey();
         }
 
         public void FirstExRun()
