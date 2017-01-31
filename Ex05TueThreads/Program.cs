@@ -24,8 +24,8 @@ namespace Ex05TueThreads
         {
             CounterThreads ct = new CounterThreads();
 
-            Thread posThread = new Thread(new ThreadStart(ct.PositiveIncrement));
-            Thread negThread = new Thread(new ThreadStart(ct.NegativeIncrement));
+            Thread posThread = new Thread(new ThreadStart(ct.RunPos));
+            Thread negThread = new Thread(new ThreadStart(ct.RunNeg));
 
             posThread.Start();
             negThread.Start();

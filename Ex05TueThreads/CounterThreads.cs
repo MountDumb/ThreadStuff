@@ -10,69 +10,69 @@ namespace Ex05TueThreads
     public class CounterThreads
     {
         private static int _counter = 0;
-        private bool _lockFlag = false;
-        private static object _padLock = new object();
+        private bool _lastRanPostive = false;
+        //private static object _padLock = new object();
 
         public CounterThreads()
         {
 
         }
 
-        public static int Counter
+       public void RunPos()
         {
-         get
+            while (true)
             {
-                
-               return _counter;
-                
-            }  
+                PositiveIncrement();
+            }
+        }
+
+        public void RunNeg()
+        {
+            while (true)
+            {
+                NegativeIncrement();
+            }
         }
 
         public void PositiveIncrement()
         {
 
-            while (true)
+
+            lock (this)
             {
-                lock (this)
+                if (_lastRanPostive == true)
                 {
-                    if (_lockFlag == true)
-                    {
-                        Monitor.Wait(this);
-                    }
-                    _counter += 2;
-                    Console.WriteLine(_counter);
-                    Thread.Sleep(1000);
-                    _lockFlag = false;
-                    Monitor.Pulse(this);
-                    return;
-                    
+                    Monitor.Wait(this);
                 }
+                _counter += 2;
+                Console.WriteLine(_counter);
+                Thread.Sleep(1000);
+                _lastRanPostive = true;
+                Monitor.Pulse(this);
+                
+
             }
+
 
         }
 
         public void NegativeIncrement()
         {
-            while (true)
-            {
-                lock (this)
-                {
-                    if (_lockFlag == true)
-                    {
-                        Monitor.Wait(this);
-                    }
-                    _counter -= 1;
-                    Console.WriteLine(_counter);
-                    
-                    _lockFlag = true;
-                    Monitor.Pulse(this);
-                    String crap = "CRAP!!!!!";
-                    
 
+            lock (this)
+            {
+                if (_lastRanPostive == false)
+                {
+                    Monitor.Wait(this);
                 }
-                
+                _counter -= 1;
+                Console.WriteLine(_counter);
+
+                _lastRanPostive = false;
+                Monitor.Pulse(this);
             }
-            
+
+
         }
 
 
