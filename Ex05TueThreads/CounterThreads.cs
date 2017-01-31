@@ -66,6 +66,7 @@ namespace Ex05TueThreads
                     
                     _lockFlag = true;
                     Monitor.Pulse(this);
+                    String crap = "CRAP!!!!!";
                     
 
                 }
