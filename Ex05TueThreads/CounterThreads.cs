@@ -23,6 +23,7 @@ namespace Ex05TueThreads
             while (true)
             {
                 PositiveIncrement();
+                Thread.Sleep(1000);
             }
         }
 
@@ -31,6 +32,7 @@ namespace Ex05TueThreads
             while (true)
             {
                 NegativeIncrement();
+                Thread.Sleep(1000);
             }
         }
 
@@ -48,7 +50,7 @@ namespace Ex05TueThreads
                 _lastRanPostive = true;
                 Console.WriteLine(_counter);              
                 Monitor.Pulse(_padLock);
-                Thread.Sleep(1000);
+                
             }
 
 
@@ -67,7 +69,7 @@ namespace Ex05TueThreads
                 _lastRanPostive = false;
                 Console.WriteLine(_counter);
                 Monitor.Pulse(_padLock);
-                Thread.Sleep(1000);
+                
             }
 
 

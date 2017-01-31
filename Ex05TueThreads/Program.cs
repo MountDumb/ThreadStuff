@@ -80,7 +80,7 @@ namespace Ex05TueThreads
                     Console.WriteLine("Three strikes! Press any key to exit");
                     easeThread.Join();
                     alsoThread.Join();
-                    //tempThread.Join();
+                    tempThread.Join();
 
                     Console.ReadKey();
                     Environment.Exit(0);

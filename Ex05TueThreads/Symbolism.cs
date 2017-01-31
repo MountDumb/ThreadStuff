@@ -28,6 +28,7 @@ namespace Ex05TueThreads
             while (true)
             {
                 Asterisker();
+                Thread.Sleep(1000);
             }
         }
 
@@ -36,6 +37,7 @@ namespace Ex05TueThreads
             while (true)
             {
                 Hasher();
+                Thread.Sleep(1000);
             }
         }
         public void Asterisker()
@@ -61,11 +63,12 @@ namespace Ex05TueThreads
             _availableSymbols = _symbolType.Hash;
             Console.WriteLine(_output);
             Monitor.Pulse(_lockpad);
-            Thread.Sleep(1000);
+          //Thread.Sleep(1000);
+
 
 
             }
-          
+
         }
 
         public void Hasher()
@@ -89,7 +92,7 @@ namespace Ex05TueThreads
             _availableSymbols = _symbolType.Asterisk;
             Console.WriteLine(_output);
             Monitor.Pulse(_lockpad);
-            Thread.Sleep(1000);
+          //Thread.Sleep(1000);
             }
         }
     }
