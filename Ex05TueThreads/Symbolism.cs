@@ -41,25 +41,27 @@ namespace Ex05TueThreads
         public void Asterisker()
         {
           
-                lock (_lockpad)
+            lock (_lockpad)
             {
-                string _output = "";
-                    if (_availableSymbols != _symbolType.Asterisk)
-                    {
-                        Monitor.Wait(_lockpad);
-                    }
 
-                    for (int i = 0; i < 60; i++)
-                    {
-                        _output = _output + "*";
-                        _totalSymbolCount++;
-                    }
+            string _output = "";
 
-               _output = _output + " " + _totalSymbolCount;
-               _availableSymbols = _symbolType.Hash;
-               Console.WriteLine(_output);
-               Monitor.Pulse(_lockpad);
-               Thread.Sleep(1000);
+            if (_availableSymbols != _symbolType.Asterisk)
+            {
+                Monitor.Wait(_lockpad);
+            }
+
+            for (int i = 0; i < 60; i++)
+            {
+                _output = _output + "*";
+                _totalSymbolCount++;
+            }
+
+            _output = _output + " " + _totalSymbolCount;
+            _availableSymbols = _symbolType.Hash;
+            Console.WriteLine(_output);
+            Monitor.Pulse(_lockpad);
+            Thread.Sleep(1000);
 
 
             }
@@ -69,25 +71,25 @@ namespace Ex05TueThreads
         public void Hasher()
         {
            
-                lock (_lockpad)
+            lock (_lockpad)
+            {
+            string _output = "";
+            if (_availableSymbols != _symbolType.Hash)
                 {
-                string _output = "";
-                if (_availableSymbols != _symbolType.Hash)
-                    {
-                        Monitor.Wait(_lockpad);
-                    }
+                    Monitor.Wait(_lockpad);
+                }
 
-                    for (int i = 0; i < 60; i++)
-                    {
-                        _output = _output + "#";
-                        _totalSymbolCount++;
-                    }
+            for (int i = 0; i < 60; i++)
+            {
+                _output = _output + "#";
+                _totalSymbolCount++;
+            }
 
-                _output = _output + " " + _totalSymbolCount;
-                _availableSymbols = _symbolType.Asterisk;
-                Console.WriteLine(_output);
-                Monitor.Pulse(_lockpad);
-                Thread.Sleep(1000);
+            _output = _output + " " + _totalSymbolCount;
+            _availableSymbols = _symbolType.Asterisk;
+            Console.WriteLine(_output);
+            Monitor.Pulse(_lockpad);
+            Thread.Sleep(1000);
             }
         }
     }
