@@ -26,17 +26,20 @@ namespace Ex05TueThreads
             Symbolism symbols = new Symbolism();
 
             Thread astThread = new Thread(new ThreadStart(symbols.DoAsterisk));
-            Thread Hashthread = new Thread(new ThreadStart(symbols.Dohash));
+            Thread hashthread = new Thread(new ThreadStart(symbols.Dohash));
+
+            astThread.IsBackground = true;
+            hashthread.IsBackground = true;
 
             astThread.Start();
-            Hashthread.Start();
+            hashthread.Start();
 
             Console.ReadKey();
 
             Console.WriteLine("Aborting...");
 
             astThread.Abort();
-            Hashthread.Abort();
+            hashthread.Abort();
 
             Console.ReadKey();
 
